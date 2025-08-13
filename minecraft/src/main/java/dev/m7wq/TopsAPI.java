@@ -23,10 +23,10 @@ public class TopsAPI
     private TopsAPI(Plugin plugin){
         config = new TopsConfig(
             "&8-------- LEADERBOARD --------", 
-        "&8#%rank%. &e%name% &7(&f%amount%&7)", 
+            "&8#%rank%. &e%name% &7(&f%amount%&7)", 
             "&8-------- LEADERBOARD --------",
-                   0.25,
-   200
+            0.25,
+            200
         );
 
         startUpdater(plugin);
