@@ -1,6 +1,7 @@
 package dev.m7wq;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ import lombok.Getter;
 public class TopsAPI 
 {
     private TopsConfig config;
-    private List<HologramsContainer<?, ?>> containers;
+    private List<HologramsContainer<?, ?>> containers = new ArrayList<>();
     private static TopsAPI instance;
 
     private TopsAPI(Plugin plugin){
