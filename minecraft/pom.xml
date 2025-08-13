@@ -7,7 +7,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>minecraft</artifactId>
+    <groupId>com.github.m7wq</groupId>
+    <artifactId>TopsAPI-minecraft</artifactId>
     <packaging>jar</packaging>
 
     <name>minecraft</name>
