@@ -1,5 +1,7 @@
 # Installing
 
+`-` [![](https://jitpack.io/v/m7wq/TopsAPI.svg)](https://jitpack.io/#m7wq/TopsAPI)
+
 ## Repository
 
 ```xml
