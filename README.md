@@ -160,6 +160,16 @@ REFRESH_INTERVAL: 200
 
         // The footer of the holograms container
         config.setFooter("----------------------");
+
+        // Or just initialize in holograms container creating
+        hologramsContainer = new HologramsContainer(
+
+            // Un-defined will be its default value
+            HologramConfig.builder()
+                .footer("-------FOOTER--------")
+                .header("-----------HEADER----").build(), 
+            myLocation
+        );
 ```
 
 **Hologram Config Default Values:**
