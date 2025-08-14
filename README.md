@@ -221,3 +221,5 @@ LINE_FORMAT: "&8#%rank%. &e%name% &7(&f%amount%&7)"
         // Use it anywhere at anytime 
         top.getTop(map, 10);
 ```
+
+- I wish this was useful during trying it <3
