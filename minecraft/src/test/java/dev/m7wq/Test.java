@@ -36,10 +36,6 @@ public class Test {
              new Location(null, 0, 0, 0) // Holograms main location
         );
 
-        hologramsContainer = new HologramsContainer(
-            HologramConfig.
-            myLocation
-        );
 
         SortingProcessor<Player, Data> processor = SortingProcessor.<Player, Data>builder()
             .comparator(
