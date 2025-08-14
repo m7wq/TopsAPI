@@ -8,7 +8,7 @@
     </parent>
 
 
-    <groupId>com.github.m7wq</groupId>
+    <groupId>dev.m7wq</groupId>
     <artifactId>TopsAPI-core</artifactId>
     <packaging>jar</packaging>
 
