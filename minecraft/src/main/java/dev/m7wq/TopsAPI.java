@@ -1,35 +1,28 @@
 package dev.m7wq;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.bukkit.Location;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import dev.m7wq.entity.HologramsContainer;
+import dev.m7wq.configs.TopsConfig;
+import dev.m7wq.entity.holograms.HologramsContainer;
+import dev.m7wq.entity.process.SortingProcessor;
 import lombok.Getter;
 
 @Getter
 public class TopsAPI 
 {
-    private TopsConfig config;
-    private List<HologramsContainer<?, ?>> containers = new ArrayList<>();
+    private final TopsConfig config;
+    private final Map<HologramsContainer, SortingProcessor<?, ?>> containers;
     private static TopsAPI instance;
 
     private TopsAPI(Plugin plugin){
         config = new TopsConfig(
-            "&8-------- LEADERBOARD --------", 
-            "&8#%rank%. &e%name% &7(&f%amount%&7)", 
-            "&8-------- LEADERBOARD --------",
-            0.25,
+             false,
             200
         );
 
+        containers = new HashMap<>();
         startUpdater(plugin);
     }
 
@@ -39,25 +32,26 @@ public class TopsAPI
         return instance;
     }
 
-    public void appendContainer(HologramsContainer<?, ?> container){
-        containers.add(container);
+    public <K,V> void appendContainer(HologramsContainer container, SortingProcessor<K, V> processor){
+        containers.put(container, processor);
     }
 
     private void startUpdater(Plugin plugin){
-        new BukkitRunnable() {
+       new BukkitRunnable() {
 
-            @Override
-            public void run() {
-                containers.forEach(container->{
-                    if (container.getLocation().getWorld()==null) {
-                        return;
-                    }
-                    container.clear();
-                    container.display();
-                });
-            }
-            
-        }.runTaskTimer(plugin, 0, config.getRefreshInterval());
+           @Override
+           public void run() {
+               containers.keySet().forEach(container->{
+                   if (container.getLocation().getWorld()==null) {
+                       System.out.printf("TopsAPI: The world %s is null%n", container.getLocation().getWorld().getName());
+                       return;
+                   }
+                   container.clear();
+                   container.display(containers.get(container));
+               });
+           }
+
+       }.runTaskTimer(plugin, 0, config.getRefreshInterval());
     }
 
     public static TopsAPI getInstance(){
@@ -68,9 +62,4 @@ public class TopsAPI
 
         return instance;
     }
-
-
-
-
-
 }
