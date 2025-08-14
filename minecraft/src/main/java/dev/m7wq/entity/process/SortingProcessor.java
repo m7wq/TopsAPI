@@ -28,14 +28,13 @@ public class SortingProcessor<K,V> {
 
     public void process(List<Hologram> holograms, HologramConfig config){
         
-        
+        holograms.add(new Hologram(config.getHeader(), config));
+
         List<Map.Entry<K, V>> entries = map.entrySet()
                 .stream()
                 .sorted(comparator.reversed())
                 .limit(limit)
                 .toList();
-
-        System.out.println(entries);
 
     
         int rank = 1;

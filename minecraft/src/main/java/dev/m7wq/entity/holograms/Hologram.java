@@ -16,12 +16,17 @@ public class Hologram {
 
     private HologramConfig config;
     private HologramLine line;
+    private String label;
 
-    public Hologram(HologramLine line, HologramConfig config){
+    public Hologram(HologramLine line, HologramConfig config) {
         this.line = line;
         this.config = config;
     }
 
+    public Hologram(String label, HologramConfig config) {
+        this.label = label;
+        this.config = config;
+    }
 
     private ArmorStand armorStand;
 
@@ -29,15 +34,20 @@ public class Hologram {
 
 
 
-
         armorStand = location.getWorld().spawn(location.clone().add(0, 1.8, 0), ArmorStand.class);
 
 
-        String lineLabel = config.getLineFormat()
+        String lineLabel;
+        
+        
+        
+        if (this.label == null)
+            lineLabel = config.getLineFormat()
                                 .replace("%name%", line.getName())
                                 .replace("%amount%",String.valueOf(line.getAmount()))
                                 .replace("%rank%", String.valueOf(line.getRank()));
-
+        else
+            lineLabel = label;
 
 
         // Checks if the chunk isnt loaded
@@ -74,7 +84,7 @@ public class Hologram {
 
     }
 
-    public void delete(){
+    public void delete() {
 
         armorStand.remove();
     }
