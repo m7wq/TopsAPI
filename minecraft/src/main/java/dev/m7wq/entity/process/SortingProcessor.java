@@ -74,6 +74,8 @@ public class SortingProcessor<K,V> {
             rank++;
             
         }
+
+        holograms.add(new Hologram(config.getFooter(), config));
     }
 
 }
