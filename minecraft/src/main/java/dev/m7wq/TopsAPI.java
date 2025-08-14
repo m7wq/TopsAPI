@@ -36,6 +36,11 @@ public class TopsAPI
         containers.put(container, processor);
     }
 
+    public void removeContainer(HologramsContainer container){
+        containers.remove(container);
+        container.clear();
+    }
+
     private void startUpdater(Plugin plugin){
        new BukkitRunnable() {
 
