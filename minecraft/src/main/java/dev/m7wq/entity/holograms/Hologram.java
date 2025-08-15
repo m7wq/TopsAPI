@@ -86,7 +86,8 @@ public class Hologram {
 
     public void delete() {
 
-        armorStand.remove();
+        if(armorStand != null)
+            armorStand.remove();
     }
 
 }
