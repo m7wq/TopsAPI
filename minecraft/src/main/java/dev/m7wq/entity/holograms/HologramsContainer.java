@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Location;
 import dev.m7wq.configs.HologramConfig;
 import dev.m7wq.entity.process.SortingProcessor;
+import dev.m7wq.entity.process.impl.MemorySortingProcessor;
 import lombok.AllArgsConstructor;
 
 import lombok.Getter;
@@ -28,7 +29,7 @@ public class HologramsContainer {
         holograms.forEach(Hologram::delete);
     }
 
-    public <K,V> void display(SortingProcessor<K, V> processor) {
+    public void display(SortingProcessor processor) {
 
         processor.process(holograms, config);
 

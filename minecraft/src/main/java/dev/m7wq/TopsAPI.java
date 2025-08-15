@@ -7,13 +7,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 import dev.m7wq.configs.TopsConfig;
 import dev.m7wq.entity.holograms.HologramsContainer;
 import dev.m7wq.entity.process.SortingProcessor;
+import dev.m7wq.entity.process.impl.MemorySortingProcessor;
 import lombok.Getter;
 
 @Getter
 public class TopsAPI 
 {
     private final TopsConfig config;
-    private final Map<HologramsContainer, SortingProcessor<?, ?>> containers;
+    private final Map<HologramsContainer, SortingProcessor> containers;
     private static TopsAPI instance;
 
     private TopsAPI(Plugin plugin){
@@ -32,7 +33,7 @@ public class TopsAPI
         return instance;
     }
 
-    public <K,V> void appendContainer(HologramsContainer container, SortingProcessor<K, V> processor){
+    public void appendContainer(HologramsContainer container, SortingProcessor processor){
         containers.put(container, processor);
     }
 

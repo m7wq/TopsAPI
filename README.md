@@ -1,6 +1,6 @@
 # Installing
 
-`-` [![](https://jitpack.io/v/m7wq/TopsAPI.svg)](https://jitpack.io/#m7wq/TopsAPI)
+[![](https://jitpack.io/v/m7wq/TopsAPI.svg)](https://jitpack.io/#m7wq/TopsAPI)
 
 ## Repository
 
@@ -25,6 +25,7 @@
     <!-- 
         Replace VERSION with the API version
         Note: Minecraft version doesnt require the core
+        Note: minecraft-mongodb requires Minecraft version dependency
      -->
     
     <!-- Minecraft version of the API -->
@@ -33,6 +34,16 @@
 	    <artifactId>TopsAPI-minecraft</artifactId>
 	    <version>VERSION</version>
 	</dependency>
+
+    <!--
+        Minecraft module addon (MongoDB Sorting Processor)
+        If you want to use mongodb directly to handle TOPS
+     -->
+    <dependency>
+    	<groupId>com.github.m7wq</groupId>
+	    <artifactId>TopsAPI-minecraft-mongodb</artifactId>
+	    <version>VERSION</version>
+    </dependency>
 
     <!-- Normal Java version of the API -->
     <dependency>
@@ -46,6 +57,7 @@
     /*
         Replace VERSION with the API version
         Note: Minecraft version doesnt require the core
+        Note: minecraft-mongodb requires Minecraft version dependency
     */
 
     
@@ -53,6 +65,12 @@
 
             // Minecraft version of the API
 	        implementation 'com.github.m7wq:TopsAPI-minecraft:VERSION'
+
+            /*
+                Minecraft module addon (MongoDB Sorting Processor)
+                If you want to use mongodb directly to handle TOPS
+            */
+            implementation 'com.github.m7wq:TopsAPI-minecraft-mongodb:VERSION'
 
             // Normal Java version of the API
             implementation 'com.github.m7wq:TopsAPI-core:VERSION'
@@ -97,19 +115,20 @@ REFRESH_INTERVAL: 200
 ```
 `-` **Making a container and appending it**
 ```java
-        HologramsContainer hologramsContainer;
+        HologramsContainer container;
 
         Map<Player, Data> dataMap = new HashMap<>(); // Your Data map
         
         // dataMap.put...
 
         // Initialize your container
-        hologramsContainer = new HologramsContainer(
+        container = new HologramsContainer(
             HologramConfig.builder().build(), // Configuration of the holograms container
              new Location(null, 0, 0, 0) // Holograms main location
         );
 
-        SortingProcessor<Player, Data> processor = SortingProcessor.<Player, Data>builder()
+        // Minecraft version default sorting processor
+        MemorySortingProcessor<Player, Data> memoryProcessor = MemorySortingProcessor.<Player, Data>builder()
             .comparator(
                 Comparator.comparingInt(entry -> entry.getValue().getKills()) // Comparing Method (by kills)
             )
@@ -117,10 +136,37 @@ REFRESH_INTERVAL: 200
             .map(dataMap) // Tops map that is gonna be sorted
             .limit(10) // Tops limit (amount of players on the top leaderboard)
             .build();  
-            
+
+        /**
+         * If you use minecraft-mongodb dependency you will be able to use this future
+         * MongoDB handling processor
+         * This handles the data directly from MongoDB Collection
+         * So you dont need to use memory-side anymore
+        */
+        
+        MongoCollection<Document> collection = null; // implement your collection
+    
+        MongodbSortingProcessor mongodbProcessor = MongodbSortingProcessor.builder()
+            .mapper(
+                document-> DocumentEntry.builder()
+                    .key(document.getString("name"))
+                    .value(document.getInteger("points"))
+                    .build()
+            )
+            .compareBy("points")
+            .collection(collection)
+            .limit(10)
+            .build();
 
 
-        TopsAPI.getInstance().appendContainer(hologramsContainer, processor);
+        // appending memory processor ->  
+        TopsAPI.getInstance().appendContainer(container, memoryProcessor);
+
+        /*
+         * If you have minecraft-mongodb dependency and trying ot append its processor
+         * You can append any processor with the same style
+        */
+        TopsAPI.getInstance().appendContainer(container, mongodbProcessor);
 ```
 
 `NOTE:` **When you append the cointainer it will automatically displays it in the specified location**
