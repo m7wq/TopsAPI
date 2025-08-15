@@ -30,7 +30,7 @@
     
     <!-- Minecraft version of the API -->
 	<dependency>
-	    <groupId>com.github.m7wq</groupId>
+	    <groupId>com.github.m7wq.TopsAPI</groupId>
 	    <artifactId>TopsAPI-minecraft</artifactId>
 	    <version>VERSION</version>
 	</dependency>
@@ -40,14 +40,14 @@
         If you want to use mongodb directly to handle TOPS
      -->
     <dependency>
-    	<groupId>com.github.m7wq</groupId>
+    	<groupId>com.github.m7wq.TopsAPI</groupId>
 	    <artifactId>TopsAPI-minecraft-mongodb</artifactId>
 	    <version>VERSION</version>
     </dependency>
 
     <!-- Normal Java version of the API -->
     <dependency>
-	    <groupId>com.github.m7wq</groupId>
+	    <groupId>com.github.m7wq.TopsAPI</groupId>
 	    <artifactId>TopsAPI-core</artifactId>
 	    <version>VERSION</version>
 	</dependency>
@@ -64,16 +64,16 @@
 	dependencies {
 
             // Minecraft version of the API
-	        implementation 'com.github.m7wq:TopsAPI-minecraft:VERSION'
+	        implementation 'com.github.m7wq.TopsAPI:TopsAPI-minecraft:VERSION'
 
             /*
                 Minecraft module addon (MongoDB Sorting Processor)
                 If you want to use mongodb directly to handle TOPS
             */
-            implementation 'com.github.m7wq:TopsAPI-minecraft-mongodb:VERSION'
+            implementation 'com.github.m7wq.TopsAPI:TopsAPI-minecraft-mongodb:VERSION'
 
             // Normal Java version of the API
-            implementation 'com.github.m7wq:TopsAPI-core:VERSION'
+            implementation 'com.github.m7wq.TopsAPI:TopsAPI-core:VERSION'
 	}
 ```
 
