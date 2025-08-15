@@ -74,11 +74,25 @@ public class MongodbSortingProcessor implements SortingProcessor{
                 Hologram hologram = new Hologram(hologramLine, config);
 
                 holograms.add(hologram);
-                
+                rank++;
                 continue;
             }
 
             DocumentEntry entry = mapper.apply(document);
+
+            if (entry.getKey()==null || entry.getValue()==null) {
+
+                HologramLine hologramLine = HologramLine.builder()
+                .amount(0)
+                .name("None")
+                .rank(rank).build();
+
+                Hologram hologram = new Hologram(hologramLine, config);
+
+                holograms.add(hologram);
+                rank++;
+                continue;
+            }
 
             HologramLine hologramLine = HologramLine.builder()
                 .name(LuckPermsHook.format(entry.getKey(), config))

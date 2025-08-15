@@ -32,13 +32,7 @@ public class Hologram {
 
     public void create(Location location){
 
-
-
-        armorStand = location.getWorld().spawn(location.clone().add(0, 1.8, 0), ArmorStand.class);
-
-
         String lineLabel;
-        
         
         
         if (this.label == null)
@@ -56,7 +50,7 @@ public class Hologram {
             location.getChunk().load();
         }
 
-        ArmorStand  armorStand = (ArmorStand) Bukkit.getWorld(location.getWorld().getUID())
+        ArmorStand armorStand = (ArmorStand) location.getWorld()
                         .spawnEntity(location,EntityType.ARMOR_STAND);
 
 
@@ -68,10 +62,6 @@ public class Hologram {
         armorStand.setMarker(true);
         armorStand.setCustomName(ChatColor.translateAlternateColorCodes('&',lineLabel));
 
-        // make the armor stand model invisible for the legacy versions
-        armorStand.addPotionEffect(
-                new PotionEffect(PotionEffectType.INVISIBILITY, Integer.MAX_VALUE, 1, false, false)
-        );
 
         if(TopsAPI.getInstance().getConfig().isDebug()){
             System.out.println("Spawned at: " + armorStand.getLocation());
