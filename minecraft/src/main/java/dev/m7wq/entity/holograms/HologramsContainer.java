@@ -38,13 +38,15 @@ public class HologramsContainer {
 
         CompletableFuture.supplyAsync(()->{
 
-            final List<Hologram> holograms = new ArrayList<>();
+            final List<Hologram> newHolograms = new ArrayList<>();
 
-            processor.process(holograms, config);
-            return holograms;
-        }).thenAccept(holograms->{
+            processor.process(newHolograms, config);
+            return newHolograms;
+        }).thenAccept(newHolograms->{
 
-            this.holograms.addAll(holograms);
+            clear();
+
+            this.holograms.addAll(newHolograms);
 
 
             Bukkit.getScheduler().runTask(TopsAPI.getInstance().getPlugin(), ()->{
