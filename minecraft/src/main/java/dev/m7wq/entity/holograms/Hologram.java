@@ -76,8 +76,10 @@ public class Hologram {
 
     public void delete() {
 
-        if(armorStand != null)
+        if(armorStand != null){
+            armorStand.setCustomName("");
             armorStand.remove();
+        }
     }
 
 }

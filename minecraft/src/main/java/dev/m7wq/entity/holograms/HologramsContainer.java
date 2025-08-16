@@ -27,6 +27,7 @@ public class HologramsContainer {
 
     public void clear(){
         holograms.forEach(Hologram::delete);
+        holograms.clear();
     }
 
     public void display(SortingProcessor processor) {
@@ -42,7 +43,7 @@ public class HologramsContainer {
             holograms.get(i).create(location.clone().add(0,-i*spacing,0));
         }
 
-            
+        
 
        
     }
