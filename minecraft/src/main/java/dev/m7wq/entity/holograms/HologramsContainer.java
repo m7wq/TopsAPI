@@ -29,9 +29,9 @@ public class HologramsContainer {
 
 
     public void clear(){
+            holograms.forEach(Hologram::delete);
+            holograms.clear();
 
-        holograms.forEach(Hologram::delete);
-        holograms.clear();
     }
 
     public void display(SortingProcessor processor) {
@@ -44,18 +44,14 @@ public class HologramsContainer {
             return newHolograms;
         }).thenAccept(newHolograms->{
 
-            clear();
+            Bukkit.getScheduler().runTask(TopsAPI.getInstance().getPlugin(), () -> {
+                clear();
 
-            this.holograms.addAll(newHolograms);
+                holograms.addAll(newHolograms);
 
-
-            Bukkit.getScheduler().runTask(TopsAPI.getInstance().getPlugin(), ()->{
                 double spacing = config.getLineSpacing();
-
-
-
-                for(int i = 0; i < holograms.size(); i++){
-                    holograms.get(i).create(location.clone().add(0,-i*spacing,0));
+                for (int i = 0; i < holograms.size(); i++) {
+                    holograms.get(i).create(location.clone().add(0, -i * spacing, 0));
                 }
             });
 
