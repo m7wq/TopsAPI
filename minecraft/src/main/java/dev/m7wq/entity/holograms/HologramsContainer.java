@@ -44,6 +44,8 @@ public class HologramsContainer {
             return holograms;
         }).thenAccept(holograms->{
 
+            this.holograms.addAll(holograms);
+
 
             Bukkit.getScheduler().runTask(TopsAPI.getInstance().getPlugin(), ()->{
                 double spacing = config.getLineSpacing();
