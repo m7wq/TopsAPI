@@ -3,6 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/core/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/minecraft-mongodb/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/minecraft-mongodb/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/minecraft/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/minecraft/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
