@@ -2,12 +2,14 @@ package dev.m7wq.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Builder
 @Getter
+@Setter
 public class DocumentEntry {
 
-    String key;
-    Integer value;
+    private String key;
+    private Integer value;
 
 }
