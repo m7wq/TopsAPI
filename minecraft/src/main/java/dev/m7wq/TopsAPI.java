@@ -16,6 +16,7 @@ public class TopsAPI
     private final TopsConfig config;
     private final Map<HologramsContainer, SortingProcessor> containers;
     private static TopsAPI instance;
+    private final Plugin plugin;
 
     private TopsAPI(Plugin plugin){
         config = new TopsConfig(
@@ -24,6 +25,7 @@ public class TopsAPI
         );
 
         containers = new HashMap<>();
+        this.plugin = plugin;
         startUpdater(plugin);
     }
 

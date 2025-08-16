@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import dev.m7wq.TopsAPI;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import dev.m7wq.configs.HologramConfig;
 import dev.m7wq.entity.process.SortingProcessor;
@@ -44,13 +45,16 @@ public class HologramsContainer {
         }).thenAccept(holograms->{
 
 
-            double spacing = config.getLineSpacing();
+            Bukkit.getScheduler().runTask(TopsAPI.getInstance().getPlugin(), ()->{
+                double spacing = config.getLineSpacing();
 
 
 
-            for(int i = 0; i < holograms.size(); i++){
-                holograms.get(i).create(location.clone().add(0,-i*spacing,0));
-            }
+                for(int i = 0; i < holograms.size(); i++){
+                    holograms.get(i).create(location.clone().add(0,-i*spacing,0));
+                }
+            });
+
 
         });
         
