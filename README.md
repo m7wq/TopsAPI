@@ -227,6 +227,12 @@ FOOTER: "&8-------- LEADERBOARD --------"
 LINE_FORMAT: "&8#%rank%. &e%name% &7(&f%amount%&7)"
 ```
 
+**After everything**
+- Do not forget to start the updaters
+```java
+    topsAPI.startUpdater(plugin);
+```
+
 ## Core
 
 `-` **Compare Method**
