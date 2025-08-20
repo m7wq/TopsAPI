@@ -26,7 +26,6 @@ public class TopsAPI
 
         containers = new HashMap<>();
         this.plugin = plugin;
-        startUpdater(plugin);
     }
 
 
@@ -44,7 +43,7 @@ public class TopsAPI
         container.clear();
     }
 
-    private void startUpdater(Plugin plugin){
+    public void startUpdater(Plugin plugin){
        new BukkitRunnable() {
 
            @Override
